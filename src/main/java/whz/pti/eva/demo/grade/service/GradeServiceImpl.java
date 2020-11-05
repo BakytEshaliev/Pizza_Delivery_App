@@ -1,16 +1,26 @@
 package whz.pti.eva.demo.grade.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import whz.pti.eva.demo.grade.domain.Grade;
 import whz.pti.eva.demo.grade.domain.GradeRepository;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.List;
 
 @Service
+@Slf4j
 public class GradeServiceImpl implements GradeService{
     @Autowired
     GradeRepository gradeRepository;
+
+//    @PostConstruct
+//    public void postConstr(){
+//        this.addGrade("Math","1.2");
+//        log.info("post construct");
+//    }
 
     /**
      * @return list of all grades
@@ -25,9 +35,7 @@ public class GradeServiceImpl implements GradeService{
      * */
     @Override
     public void addGrade(String lecture, String grade) {
-        Grade gradeObj = new Grade();
-        gradeObj.setLecture(lecture);
-        gradeObj.setGrade(grade);
+        Grade gradeObj = new Grade(lecture,grade);
         gradeRepository.save(gradeObj);
     }
 
@@ -50,5 +58,13 @@ public class GradeServiceImpl implements GradeService{
             sum += Double.parseDouble(grade.getGrade());
         }
         return sum / amount;
+    }
+    /**
+     * delete all data
+     * */
+    @PreDestroy
+    public void preDestroy(){
+        gradeRepository.deleteAll();
+        log.info("delete all data");
     }
 }

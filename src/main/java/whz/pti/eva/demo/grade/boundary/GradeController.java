@@ -19,13 +19,10 @@ class GradeController {
     @Autowired
     GradeServiceImpl gradeService;
 
-    @GetMapping
-    public String home(){
-        return "index";
-    }
+
 
     /**
-     * bins "add" post request for "http://localhost:8080/add"
+     * binds "add" post request for "http://localhost:8080/add"
      * with 2 parameters (lecture,grade)
      * for example
      * http://localhost:8080/add?lecture=Math&grade=1.5
@@ -40,7 +37,7 @@ class GradeController {
     }
 
     /**
-     * bins "grades" get request for url "http://localhost:8080/grades"
+     * binds "grades" get request for url "http://localhost:8080/grades"
      * it gets all grades from DB and gives to view with average grade
      * @return grades.html file
      * */
@@ -49,8 +46,8 @@ class GradeController {
         List<Grade> grades = gradeService.listAllGrades();
         model.addAttribute("grades",grades);
         double avg = gradeService.calculateAverage();
-        //for debugging
-        log.info("Average grade is " + avg);
+//        for debugging
+//        log.info("Average grade is " + avg);
         model.addAttribute("avg_grade", avg);
         return "grades";
     }
