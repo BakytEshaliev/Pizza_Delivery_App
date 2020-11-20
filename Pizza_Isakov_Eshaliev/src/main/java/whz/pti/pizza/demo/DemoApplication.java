@@ -19,7 +19,7 @@ public class DemoApplication {
     @Bean
     CommandLineRunner init(){
         return (exp)->{
-            testService.test();
+//            testService.test();
         };
     }
 }
