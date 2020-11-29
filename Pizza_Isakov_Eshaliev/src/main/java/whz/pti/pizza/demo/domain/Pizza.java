@@ -1,9 +1,7 @@
 package whz.pti.pizza.demo.domain;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import whz.pti.pizza.demo.common.BaseEntity;
 
 import javax.persistence.Entity;
@@ -12,7 +10,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @NoArgsConstructor
-
+@ToString
 public class Pizza extends BaseEntity<Long>{
     //    @Id
 //    @GeneratedValue

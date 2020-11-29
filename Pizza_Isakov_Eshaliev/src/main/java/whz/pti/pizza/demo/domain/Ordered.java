@@ -4,6 +4,7 @@ import lombok.Setter;
 
 import lombok.NoArgsConstructor;
 import whz.pti.pizza.demo.common.BaseEntity;
+import whz.pti.pizza.demo.security.domain.Customer;
 
 import javax.persistence.*;
 import java.util.ArrayList;

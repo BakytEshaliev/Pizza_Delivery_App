@@ -1,7 +1,10 @@
-package whz.pti.pizza.demo.domain;
+package whz.pti.pizza.demo.security.domain;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import whz.pti.pizza.demo.common.BaseEntity;
+import whz.pti.pizza.demo.domain.DeliveryAddress;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -12,15 +15,13 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+public class Customer extends BaseEntity<Long>{
 
-public class Customer extends BaseEntity<Long> {
-//    @Id
-//    @GeneratedValue
-//    private Long id;
-    private String firstName;
-    private String lastName;
     private String loginName;
     private String passwordHash;
+    private String firstName;
+    private String lastName;
     @ManyToMany(mappedBy = "customers")
     private List<DeliveryAddress> deliveryAddress = new ArrayList<>();
+    Role role = Role.USER;
 }
