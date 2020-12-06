@@ -72,9 +72,12 @@ public class MyController {
         if (quantity > 0 && customer != null) {
             Optional<Pizza> pizza = pizzaRepo.findById(pizzaId);
             if (pizza.isPresent()) {
-                Cart cart = cartService.getCart();
-                //customer
-                if (cart.getCustomer() == null) {
+                    Cart cart;
+                try{
+                    cart = cartRepo.getByCustomer(customer);
+                }
+                catch (NullPointerException e){
+                    cart = new Cart();
                     cart.setCustomer(customer);
                 }
                 //parse
@@ -93,6 +96,7 @@ public class MyController {
                 item.setQuantity(quantity);
                 item.setPizzaSize(PizzaSize.valueOf(size));
                 item.setPizza(pizza.get());
+                cart.addItem(item);
 
                 itemRepo.save(item);
                 cartService.addItem(item);

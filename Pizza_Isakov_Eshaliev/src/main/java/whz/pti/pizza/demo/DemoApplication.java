@@ -51,8 +51,11 @@ public class DemoApplication {
             u1.setLoginName("bnutz");
             c1.setLoginName("bnutz");
             u1.setPasswordHash(passwordEncoder.encode("n1"));
+            Cart cart1 = new Cart();
+            cart1.setCustomer(c1);
             userRepository.save(u1);
             customerRepo.save(c1);
+            cartRepo.save(cart1);
             c1.setUser(u1);
             log.info("customer1 "+c1);
 

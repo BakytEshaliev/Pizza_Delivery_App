@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import whz.pti.pizza.demo.common.BaseEntity;
+import whz.pti.pizza.demo.domain.Cart;
 import whz.pti.pizza.demo.domain.DeliveryAddress;
 
 import javax.persistence.Entity;
