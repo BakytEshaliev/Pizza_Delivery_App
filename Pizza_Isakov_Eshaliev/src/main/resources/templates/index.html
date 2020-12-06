@@ -11,6 +11,12 @@
         <img src="https://www.flaticon.com/svg/static/icons/svg/1384/1384676.svg" width="60px" height="60"
              alt="pizza icon">
         <h5>Pizza App</h5>
+        <li class="nav-item navbar-nav p-1" th:if="${currentUser != null}">
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" class="btn btn-outline-success"
+                       value="ausloggen">
+            </form>
+        </li>
     </div>
 </div>
 <br>
@@ -53,11 +59,12 @@
         </tr>
         </tbody>
     </table>
-    <h2>Some Text</h2>
+    <p>Im Warenkorb::: Anzahl der bestellten Pizzas: <span th:text="${amountPizzas}"/> mit Gesamtbetrag: <span th:text="${totalPrice}"/></p>
     <br>
-    <button type="button" class="btn btn-lg btn-block">zum Warenkorb</button>
+    <a th:href="@{/cart}" role="button" class="btn btn-lg btn-block">zum Warenkorb</a>
 </section>
 
-
+<br>
+<div th:include="fragments/footer::footer"></div>
 </body>
 </html>

@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer,Long> {
-    Customer findByLoginName(String loginName);
-
     Customer getByLoginName(String loginName);
+
 }

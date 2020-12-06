@@ -28,6 +28,5 @@ public class Ordered extends BaseEntity<Long> {
     private Customer customer;
 
     @OneToMany
-    @JoinColumn(name = "orderedItem_id")
     private List<OrderedItem> orderedItems = new ArrayList<>();
 }

@@ -1,7 +1,5 @@
 package whz.pti.pizza.demo.common;
 
-import whz.pti.pizza.demo.security.domain.User;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;

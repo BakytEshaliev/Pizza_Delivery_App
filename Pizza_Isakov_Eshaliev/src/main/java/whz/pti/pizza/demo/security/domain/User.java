@@ -2,7 +2,6 @@ package whz.pti.pizza.demo.security.domain;
 
 import lombok.*;
 import whz.pti.pizza.demo.common.BaseEntity;
-import whz.pti.pizza.demo.security.domain.Role;
 
 import javax.persistence.Entity;
 

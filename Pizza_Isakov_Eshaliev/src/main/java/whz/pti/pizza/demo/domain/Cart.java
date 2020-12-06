@@ -4,28 +4,27 @@ package whz.pti.pizza.demo.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import whz.pti.pizza.demo.common.BaseEntity;
 import whz.pti.pizza.demo.security.domain.Customer;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Cart extends BaseEntity<Long> {
-//    @Id @GeneratedValue
-//    private Long id;
 
-    private int quantity;
-    @OneToOne
-    @JoinColumn(name = "customer_id")
+    private int quantity = 0;
+    @OneToOne(cascade = {CascadeType.DETACH})
     private Customer customer;
-    @OneToMany(cascade = CascadeType.ALL)
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Item> items = new ArrayList<>();
 }

@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .formLogin()
                     .loginPage("/login")
                     .defaultSuccessUrl("/home",true)
+                    .failureUrl("/login?error")
                     .usernameParameter("loginName")
                     .permitAll()
                 .and()
@@ -38,6 +39,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .csrf()
                     .ignoringAntMatchers("/h2-console/**")
                 .and()
+                    .logout()
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
+                    .logoutSuccessUrl("/")
+                .and()
                     .headers()
                     .frameOptions()
                     .sameOrigin();
@@ -46,6 +52,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+//    @Bean
+//    public BCryptPasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 //    @Override
 //    public void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth

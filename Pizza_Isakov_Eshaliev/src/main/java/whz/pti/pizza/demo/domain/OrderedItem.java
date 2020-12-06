@@ -21,14 +21,12 @@ public class OrderedItem extends BaseEntity<Long> {
 //    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "pizza_id")
     private Pizza pizza;
 
     private String name;
     private int quantity;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
     private Customer customer;
     @Enumerated(value = EnumType.STRING)
     private PizzaSize pizzaSize;

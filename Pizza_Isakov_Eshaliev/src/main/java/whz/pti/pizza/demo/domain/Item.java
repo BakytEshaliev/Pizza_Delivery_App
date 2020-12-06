@@ -16,7 +16,6 @@ public class Item extends BaseEntity<Long> {
     private int quantity;
 
     @ManyToOne(targetEntity = Pizza.class)
-    @JoinColumn(name = "pizza_id")
     private Pizza pizza;
 
     @Enumerated(value = EnumType.STRING)

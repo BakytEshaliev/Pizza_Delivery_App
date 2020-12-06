@@ -11,10 +11,9 @@ import javax.persistence.Entity;
 @Setter
 @NoArgsConstructor
 @ToString
+
 public class Pizza extends BaseEntity<Long>{
-    //    @Id
-//    @GeneratedValue
-//    private Long id;
+
     private String name;
     private double priceLarge;
     private double priceMedium;
