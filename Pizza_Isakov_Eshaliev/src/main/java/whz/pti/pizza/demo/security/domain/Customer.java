@@ -27,5 +27,9 @@ public class Customer extends BaseEntity<Long>{
     @OneToOne
     private User user;
     @ManyToMany(mappedBy = "customers")
-    private List<DeliveryAddress> deliveryAddress = new ArrayList<>();
+    private List<DeliveryAddress> deliveryAddresses = new ArrayList<>();
+
+    public void addDeliveryAddress(DeliveryAddress deliveryAddress){
+        deliveryAddresses.add(deliveryAddress);
+    }
 }
