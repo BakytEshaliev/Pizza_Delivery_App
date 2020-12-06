@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import whz.pti.pizza.demo.domain.Cart;
 import whz.pti.pizza.demo.domain.Pizza;
 import whz.pti.pizza.demo.domain.repositories.CartRepository;
 import whz.pti.pizza.demo.domain.repositories.CustomerRepository;
@@ -17,7 +16,6 @@ import whz.pti.pizza.demo.domain.repositories.PizzaRepository;
 import whz.pti.pizza.demo.security.domain.Customer;
 import whz.pti.pizza.demo.security.domain.Role;
 import whz.pti.pizza.demo.security.domain.User;
-import whz.pti.pizza.demo.service.CartServiceImpl;
 
 import java.util.List;
 
@@ -51,12 +49,9 @@ public class DemoApplication {
             u1.setLoginName("bnutz");
             c1.setLoginName("bnutz");
             u1.setPasswordHash(passwordEncoder.encode("n1"));
-            Cart cart1 = new Cart();
-            cart1.setCustomer(c1);
             userRepository.save(u1);
-            customerRepo.save(c1);
-            cartRepo.save(cart1);
             c1.setUser(u1);
+            customerRepo.save(c1);
             log.info("customer1 "+c1);
 
             Customer c2 = new Customer();
@@ -67,8 +62,8 @@ public class DemoApplication {
             u2.setLoginName("cnutz");
             u2.setPasswordHash(passwordEncoder.encode("n2"));
             userRepository.save(u2);
-            customerRepo.save(c2);
             c2.setUser(u2);
+            customerRepo.save(c2);
             log.info("customer2 "+c2);
 
             User admin = new User();

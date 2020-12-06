@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+    <meta charset="utf-8">
+    <head th:include="fragments/header :: head">
+    </head>
 <body>
-
+<div class="container">
+    <br>
+    <header>
+        <h1 class="text-center">PizzaApp</h1>
+    </header>
+</div>
+<br>
+<div class="container">
+    <form class="text-center" th:action="@{/register}" th:object="${myform}" method="post">
+        <input type="text" name="loginName" class="form-control"
+               placeholder="loginName" required="required" autofocus="autofocus">
+        <br>
+        <input type="text" name="password" class="form-control"
+               placeholder="password" required="required" autofocus="autofocus">
+        <br>
+        <input type="text" name="passwordRepeated" class="form-control"
+               placeholder="passwordRepeated" required="required" autofocus="autofocus">
+        <br>
+        <input type="text" name="firstName" class="form-control"
+               placeholder="firstName" required="required" autofocus="autofocus">
+        <br>
+        <input type="text" name="lastName" class="form-control"
+               placeholder="lastName" required="required" autofocus="autofocus">
+        <div class="error">
+            <input type="submit" class="btn btn-outline-primary"
+                   th:value="Register">
+            <a><span class="error text-danger"
+                     th:if="${error}" th:text="${error}">The loginName or password
+						you have entered is invalid, try again.</span></a>
+        </div>
+    </form>
+</div>
 </body>
 </html>

@@ -14,6 +14,7 @@
 <br>
 <div class="container">
     <div class="col-md-6  offset-md-3">
+        <a th:href="@{/register}" role="button" class="btn btn-lg btn-block">Registration</a>
         <form class="text-center" th:action="@{/login}" method="post" id="loginForm">
             <div th:if="${param.logout}">
                 <div class="alert alert-info">You have been logged out.</div>
@@ -48,6 +49,7 @@
 							versuchen</span>
                 </div>
             </div>
+
         </form>
     </div>
 </div>

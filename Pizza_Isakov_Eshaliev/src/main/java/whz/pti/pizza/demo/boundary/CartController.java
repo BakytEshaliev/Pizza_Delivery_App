@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import whz.pti.pizza.demo.domain.repositories.CartRepository;
-import whz.pti.pizza.demo.service.CartService;
+import whz.pti.pizza.demo.security.service.user.CartService;
 
 @Controller
 @Slf4j

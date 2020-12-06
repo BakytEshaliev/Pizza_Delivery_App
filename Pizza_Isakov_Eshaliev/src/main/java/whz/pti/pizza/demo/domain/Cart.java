@@ -28,7 +28,4 @@ public class Cart extends BaseEntity<Long> {
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Item> items = new ArrayList<>();
 
-    public void addItem(Item item){
-        items.add(item);
-    }
 }
