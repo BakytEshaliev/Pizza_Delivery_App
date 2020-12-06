@@ -8,11 +8,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import whz.pti.pizza.demo.domain.Cart;
 import whz.pti.pizza.demo.domain.Pizza;
+import whz.pti.pizza.demo.domain.repositories.CartRepository;
 import whz.pti.pizza.demo.domain.repositories.CustomerRepository;
+import whz.pti.pizza.demo.domain.repositories.UserRepository;
 import whz.pti.pizza.demo.domain.repositories.PizzaRepository;
 import whz.pti.pizza.demo.security.domain.Customer;
 import whz.pti.pizza.demo.security.domain.Role;
+import whz.pti.pizza.demo.security.domain.User;
+import whz.pti.pizza.demo.service.CartServiceImpl;
 
 import java.util.List;
 
@@ -21,8 +26,11 @@ import java.util.List;
 public class DemoApplication {
 
     @Autowired
-    CustomerRepository customerRepository;
-
+    UserRepository userRepository;
+    @Autowired
+    CustomerRepository customerRepo;
+    @Autowired
+    CartRepository cartRepo;
     @Autowired
     PizzaRepository pizzaRepo;
     public static void main(String[] args) {
@@ -37,27 +45,35 @@ public class DemoApplication {
             PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
             Customer c1 = new Customer();
-            c1.setFirstName("A1");
-            c1.setLastName("A@!");
+            c1.setFirstName("Chuck");
+            c1.setLastName("Palahniuk");
+            User u1 = new User();
+            u1.setLoginName("bnutz");
             c1.setLoginName("bnutz");
-            c1.setPasswordHash(passwordEncoder.encode("n1"));
-            customerRepository.save(c1);
+            u1.setPasswordHash(passwordEncoder.encode("n1"));
+            userRepository.save(u1);
+            customerRepo.save(c1);
+            c1.setUser(u1);
             log.info("customer1 "+c1);
 
             Customer c2 = new Customer();
-            c2.setFirstName("A2");
-            c2.setLastName("A@");
+            c2.setFirstName("David");
+            c2.setLastName("Fincher");
             c2.setLoginName("cnutz");
-            c2.setPasswordHash(passwordEncoder.encode("n2"));
-            customerRepository.save(c2);
+            User u2 = new User();
+            u2.setLoginName("cnutz");
+            u2.setPasswordHash(passwordEncoder.encode("n2"));
+            userRepository.save(u2);
+            customerRepo.save(c2);
+            c2.setUser(u2);
             log.info("customer2 "+c2);
 
-            Customer admin = new Customer();
+            User admin = new User();
             admin.setLoginName("admin");
             admin.setRole(Role.ADMIN);
             admin.setPasswordHash(passwordEncoder.encode("a1"));
-            customerRepository.save(admin);
-            log.info("customer3 "+admin);
+            userRepository.save(admin);
+            log.info("admin "+admin);
 
             Pizza pizza1 = new Pizza();
             pizza1.setName("Margarita");
@@ -77,7 +93,6 @@ public class DemoApplication {
             pizza3.setPriceMedium(4);
             pizza3.setPriceLarge(5);
             pizzaRepo.saveAll(List.of(pizza1,pizza2,pizza3));
-
         };
     }
 }

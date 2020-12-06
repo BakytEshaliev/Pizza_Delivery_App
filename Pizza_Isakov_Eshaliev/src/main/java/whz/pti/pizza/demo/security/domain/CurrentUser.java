@@ -1,21 +1,24 @@
 package whz.pti.pizza.demo.security.domain;
 
+import lombok.Getter;
 import lombok.ToString;
 import org.springframework.security.core.authority.AuthorityUtils;
 
 
 
 @ToString
+@Getter
 public class CurrentUser extends org.springframework.security.core.userdetails.User {
-    private Customer customer;
+    private User user;
 
-    public CurrentUser(Customer customer) {
-        super(customer.getLoginName(),customer.getPasswordHash(),AuthorityUtils.createAuthorityList(customer.getRole().toString()));
-        this.customer = customer;
+    public CurrentUser(User user) {
+        super(user.getLoginName(),user.getPasswordHash(),AuthorityUtils.createAuthorityList(user.getRole().toString()));
+        this.user = user;
     }
 
 
-    public Customer getCustomer() {
-        return customer;
+    public User getUser() {
+        return user;
     }
+
 }

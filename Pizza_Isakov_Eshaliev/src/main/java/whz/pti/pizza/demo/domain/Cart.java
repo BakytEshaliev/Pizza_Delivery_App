@@ -8,7 +8,9 @@ import whz.pti.pizza.demo.common.BaseEntity;
 import whz.pti.pizza.demo.security.domain.Customer;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -24,9 +26,6 @@ public class Cart extends BaseEntity<Long> {
     @OneToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
-
-    //  private List<Item> items = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL)
-    @MapKey(name = "id")
-    private Map<Long,Item> items = new HashMap<>();
+    private List<Item> items = new ArrayList<>();
 }

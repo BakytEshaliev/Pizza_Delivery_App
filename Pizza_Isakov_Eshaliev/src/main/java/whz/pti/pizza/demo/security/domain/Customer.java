@@ -8,6 +8,7 @@ import whz.pti.pizza.demo.domain.DeliveryAddress;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,5 +24,7 @@ public class Customer extends BaseEntity<Long>{
     private String lastName;
     @ManyToMany(mappedBy = "customers")
     private List<DeliveryAddress> deliveryAddress = new ArrayList<>();
+    @OneToOne
+    User user;
     Role role = Role.USER;
 }

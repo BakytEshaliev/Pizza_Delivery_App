@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <head th:include="fragments/header :: head">
+    </head>
+<body>
+<br>
+<div class="container bg-light">
+    <div class="row">
+        <img src="https://www.flaticon.com/svg/static/icons/svg/1384/1384676.svg" width="60px" height="60"
+             alt="pizza icon">
+        <h5>Pizza App</h5>
+    </div>
+</div>
+<br>
+<section class="container">
+    <table class="table table-hover table-bordered" th:if="items!=null">
+        <thead class="bg-secondary">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Size</th>
+            <th scope="col">Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item: ${items}">
+          <td th:text="${item.getPizza().getName()}"/>
+          <td th:text="${item.getPizzaSize()}"/>
+          <td th:text="${item.getQuantity()}"/>
+        </tr>
+        </tbody>
+    </table>
+</section>
+<section class="container">
+    <h2>The total price: <span style="color: red" th:text="${totalPrice}"/></h2>
+    <a th:href="@{/home}" role="button" class="btn btn-lg btn-block">zurück zur Homepage</a>
+</section>
+<br>
+<div th:include="fragments/footer::footer"></div>
+</body>
+</html>
