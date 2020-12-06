@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <head th:include="fragments/header :: head">
+    </head>
+<body>
+<div class="container">
+    <br>
+    <header>
+        <h1 class="text-center">PizzaApp</h1>
+    </header>
+</div>
+<br>
+<div class="container">
+    <form class="text-center" th:action="@{/newAddress}" th:object="${daForm}" method="post">
+        <input type="text" name="street" class="form-control"
+               placeholder="street" required="required" autofocus="autofocus">
+        <br>
+        <input type="text" name="hauseNumber" class="form-control"
+               placeholder="hauseNumber" required="required" autofocus="autofocus">
+        <br>
+        <input type="text" name="town" class="form-control"
+               placeholder="town" required="required" autofocus="autofocus">
+        <br>
+        <input type="text" name="postalCode" class="form-control"
+               placeholder="postalCode" required="required" autofocus="autofocus">
+        <br>
+        <div class="error">
+            <input type="submit" class="btn btn-outline-primary"
+                   th:value="Create">
+        </div>
+    </form>
+</div>
+</body>
+</html>

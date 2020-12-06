@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <head th:include="fragments/header :: head">
+    </head>
+<body>
+<br>
+<div class="container bg-light">
+    <div class="row">
+        <img src="https://www.flaticon.com/svg/static/icons/svg/1384/1384676.svg" width="60px" height="60"
+             alt="pizza icon">
+        <h5>Pizza App</h5>
+    </div>
+</div>
+<br>
+<section class="container">
+    <table class="table table-hover table-bordered">
+        <thead class="bg-secondary">
+        <tr>
+            <th scope="col">Street</th>
+            <th scope="col">Hause number</th>
+            <th scope="col">Town</th>
+            <th scope="col">PostalCode</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="deliveryAddress: ${listCostumerDeliveryAddresses}">
+            <form th:action="@{/(deliveryAddressId=${deliveryAddress.getId()})}" method="post" class="form-row">
+                <!--                    Street-->
+                <td>
+                    <span type="text" th:text="${deliveryAddress.getStreet()}"></span>
+                </td>
+                <!--                    Home number-->
+                <td>
+                    <span type="text" th:text="${deliveryAddress.getHouseNumber()}"></span>
+                </td>
+                <!--                    Town-->
+                <td>
+                    <span type="text" th:text="${deliveryAddress.getTown()}"></span>
+                </td>
+                <!--                    PostalCode-->
+                <td>
+                    <span type="text" th:text="${deliveryAddress.getPostalCode()}"></span>
+                </td>
+                <!--                    Order-->
+                <td>
+                    <button type="submit" class="btn btn-outline-primary">Order</button>
+                </td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <a th:href="@{/newAddress}" role="button" class="btn btn-lg btn-block">New Address</a>
+</section>
+
+<br>
+<div th:include="fragments/footer::footer"></div>
+</body>
+</html>
