@@ -7,9 +7,10 @@ import whz.pti.pizza.demo.domain.DeliveryAddress;
 import whz.pti.pizza.demo.security.domain.Customer;
 
 import java.util.List;
+import java.util.Optional;
+
 @Repository
 
 public interface DeliveryAddressRepository extends CrudRepository<DeliveryAddress, Long> {
-    List<DeliveryAddress> getByCustomers(Customer customer);
     DeliveryAddress getById(Long id);
 }

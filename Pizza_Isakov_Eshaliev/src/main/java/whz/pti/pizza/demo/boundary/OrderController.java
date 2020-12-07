@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import whz.pti.pizza.demo.domain.DeliveryAddress;
 import whz.pti.pizza.demo.domain.Item;
 import whz.pti.pizza.demo.domain.Ordered;
 import whz.pti.pizza.demo.domain.OrderedItem;
@@ -50,10 +51,19 @@ public class OrderController {
         Customer customer = customerRepository
                 .getByLoginName(user.getLoginName());
 
+        DeliveryAddress deliveryAddress = deliveryAddressRepository.getById(deliveryAddressId);
+
+        if (!deliveryAddress.getCustomers().contains(customer)){
+            deliveryAddress.addCustomer(customer);
+        }
+        if (!customer.getDeliveryAddresses().contains(deliveryAddress)){
+            customer.addDeliveryAddress(deliveryAddress);
+        }
+
         Ordered ordered = new Ordered();
         ordered.setNumberOfItems(cartService.getQuantity());
         ordered.setCustomer(customer);
-        ordered.setDeliveryAddress(deliveryAddressRepository.getById(deliveryAddressId));
+        ordered.setDeliveryAddress(deliveryAddress);
 
         for (Item item : cartService.getItems()){
             OrderedItem orderedItem = new OrderedItem();

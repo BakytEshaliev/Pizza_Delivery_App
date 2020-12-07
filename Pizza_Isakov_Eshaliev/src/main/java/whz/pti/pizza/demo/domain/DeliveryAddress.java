@@ -17,7 +17,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class DeliveryAddress extends BaseEntity<Long> {
 //    @Id @GeneratedValue
 //    private Long id;
@@ -38,5 +37,13 @@ public class DeliveryAddress extends BaseEntity<Long> {
 
     public void addCustomer(Customer customer){
         customers.add(customer);
+    }
+
+    @Override
+    public String toString(){
+        return "Street: " + street
+                + "houseNumber: " + houseNumber
+                + "town: " + town
+                + "postalCode: " + postalCode;
     }
 }

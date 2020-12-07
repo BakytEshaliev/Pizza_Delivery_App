@@ -44,7 +44,7 @@ public class DeliveryAddressController {
                 .getUser();
         Customer customer = customerRepository
                 .getByLoginName(user.getLoginName());
-        model.addAttribute("listCostumerDeliveryAddresses", deliveryAddressRepository.getByCustomers(customer));
+        model.addAttribute("listAllDeliveryAddresses", deliveryAddressRepository.findAll());
         return "deliveryAddress";
     }
 
@@ -60,7 +60,7 @@ public class DeliveryAddressController {
                                       Model model){
         if (bindingResult.hasErrors()){
             model.addAttribute("error",bindingResult.getGlobalError().getDefaultMessage());
-            return "registration";
+            return "newAddress";
         }
 
         User user = currentUserControllerAdvice
