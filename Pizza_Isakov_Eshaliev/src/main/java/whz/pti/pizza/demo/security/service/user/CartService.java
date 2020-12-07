@@ -12,4 +12,5 @@ public interface CartService {
     List<Item> getItems();
     double calculateTotal();
     Cart getCart();
+    void clearCart();
 }

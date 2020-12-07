@@ -23,7 +23,6 @@ public class OrderedItem extends BaseEntity<Long> {
     @ManyToOne
     private Pizza pizza;
 
-    private String name;
     private int quantity;
 
     @ManyToOne

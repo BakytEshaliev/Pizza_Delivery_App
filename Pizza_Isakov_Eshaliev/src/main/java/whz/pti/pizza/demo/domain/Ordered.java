@@ -29,4 +29,11 @@ public class Ordered extends BaseEntity<Long> {
 
     @OneToMany
     private List<OrderedItem> orderedItems = new ArrayList<>();
+
+    @OneToOne
+    private DeliveryAddress deliveryAddress;
+
+    public void addOrderedItem(OrderedItem orderedItem){
+        orderedItems.add(orderedItem);
+    }
 }

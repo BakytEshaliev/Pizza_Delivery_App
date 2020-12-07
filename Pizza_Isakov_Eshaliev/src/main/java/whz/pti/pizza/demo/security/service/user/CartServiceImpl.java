@@ -9,6 +9,7 @@ import whz.pti.pizza.demo.domain.repositories.CartRepository;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -78,5 +79,10 @@ public class CartServiceImpl implements CartService{
     @Override
     public Cart getCart() {
         return cart;
+    }
+    @Override
+    public void clearCart(){
+        cart.setItems(new ArrayList<>());
+        cart.setQuantity(0);
     }
 }

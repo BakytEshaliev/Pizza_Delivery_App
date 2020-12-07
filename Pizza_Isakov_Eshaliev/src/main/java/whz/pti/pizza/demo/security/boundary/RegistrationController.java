@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import whz.pti.pizza.demo.domain.Cart;
 import whz.pti.pizza.demo.domain.repositories.CustomerRepository;
 import whz.pti.pizza.demo.domain.repositories.UserRepository;
 import whz.pti.pizza.demo.security.domain.Customer;
@@ -28,6 +29,7 @@ public class RegistrationController {
     CustomerRepository customerRepo;
     @Autowired
     CustomerCreateFormValidator customerCreateFormValidator;
+//    @Autowired
 
     PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
@@ -60,6 +62,9 @@ public class RegistrationController {
         customer.setLastName(form.getLastName());
         customer.setUser(user);
         customerRepo.save(customer);
+//        Cart cart = new Cart();
+//        cart.setCustomer(customer);
+//        ca
         log.info("Register "+customer);
         log.info("Register "+user);
         return "redirect:/login";

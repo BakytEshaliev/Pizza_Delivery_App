@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface DeliveryAddressRepository extends CrudRepository<DeliveryAddress, Long> {
     List<DeliveryAddress> getByCustomers(Customer customer);
+    DeliveryAddress getById(Long id);
 }

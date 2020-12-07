@@ -27,7 +27,7 @@
         </thead>
         <tbody>
         <tr th:each="deliveryAddress: ${listCostumerDeliveryAddresses}">
-            <form th:action="@{/(deliveryAddressId=${deliveryAddress.getId()})}" method="post" class="form-row">
+            <form th:action="@{/order(deliveryAddressId=${deliveryAddress.getId()})}" method="post" class="form-row">
                 <!--                    Street-->
                 <td>
                     <span type="text" th:text="${deliveryAddress.getStreet()}"></span>
