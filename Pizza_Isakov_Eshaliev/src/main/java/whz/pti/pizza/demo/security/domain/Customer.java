@@ -8,10 +8,7 @@ import whz.pti.pizza.demo.common.BaseEntity;
 import whz.pti.pizza.demo.domain.Cart;
 import whz.pti.pizza.demo.domain.DeliveryAddress;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 

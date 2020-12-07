@@ -1,5 +1,6 @@
 package whz.pti.pizza.demo.security.service.user;
 
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
@@ -19,6 +20,7 @@ public class CartServiceImpl implements CartService{
     @Autowired
     CartRepository cartRepo;
 
+    @Setter
     private Cart cart;
 
     @PostConstruct

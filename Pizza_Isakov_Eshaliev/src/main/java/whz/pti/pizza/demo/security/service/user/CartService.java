@@ -6,6 +6,7 @@ import whz.pti.pizza.demo.domain.Item;
 import java.util.List;
 
 public interface CartService {
+    void setCart(Cart cart);
     void addItem(Item item);
     Item getItemById(long id);
     int getQuantity();

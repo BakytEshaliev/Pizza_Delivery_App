@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import whz.pti.pizza.demo.domain.Cart;
 import whz.pti.pizza.demo.domain.Pizza;
 import whz.pti.pizza.demo.domain.repositories.CartRepository;
 import whz.pti.pizza.demo.domain.repositories.CustomerRepository;
@@ -52,6 +53,9 @@ public class DemoApplication {
             userRepository.save(u1);
             c1.setUser(u1);
             customerRepo.save(c1);
+            Cart cart1 = new Cart();
+            cart1.setCustomer(c1);
+            cartRepo.save(cart1);
             log.info("customer1 "+c1);
 
             Customer c2 = new Customer();
@@ -64,6 +68,9 @@ public class DemoApplication {
             userRepository.save(u2);
             c2.setUser(u2);
             customerRepo.save(c2);
+            Cart cart2 = new Cart();
+            cart2.setCustomer(c2);
+            cartRepo.save(cart2);
             log.info("customer2 "+c2);
 
             User admin = new User();
