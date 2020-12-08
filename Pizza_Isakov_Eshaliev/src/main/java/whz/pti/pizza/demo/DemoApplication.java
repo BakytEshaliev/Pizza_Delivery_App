@@ -70,6 +70,7 @@ public class DemoApplication {
             customerRepo.save(c2);
             Cart cart2 = new Cart();
             cart2.setCustomer(c2);
+            //second have not cart for now
             cartRepo.save(cart2);
             log.info("customer2 "+c2);
 

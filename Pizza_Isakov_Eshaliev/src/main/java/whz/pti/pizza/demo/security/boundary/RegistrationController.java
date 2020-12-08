@@ -30,8 +30,8 @@ public class RegistrationController {
     CustomerRepository customerRepo;
     @Autowired
     CustomerCreateFormValidator customerCreateFormValidator;
-//    @Autowired
-//    CartRepository cartRepository;
+    @Autowired
+    CartRepository cartRepository;
 
     PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
@@ -64,9 +64,9 @@ public class RegistrationController {
         customer.setLastName(form.getLastName());
         customer.setUser(user);
         customerRepo.save(customer);
-//        Cart cart = new Cart();
-//        cart.setCustomer(customer);
-//        cartRepository.save(cart);
+        Cart cart = new Cart();
+        cart.setCustomer(customer);
+        cartRepository.save(cart);
         log.info("Register "+customer);
         log.info("Register "+user);
         return "redirect:/login";

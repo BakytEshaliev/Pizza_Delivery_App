@@ -21,13 +21,19 @@
             <th scope="col">Name</th>
             <th scope="col">Size</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Delete</th>
         </tr>
         </thead>
-        <tbody>
         <tr th:each="item: ${items}">
-          <td th:text="${item.getPizza().getName()}"/>
-          <td th:text="${item.getPizzaSize()}"/>
-          <td th:text="${item.getQuantity()}"/>
+            <form th:action="@{/cart}" method="post">
+                <input type="hidden" th:name="itemId" th:value="${item.getId()}"/>
+                <td th:text="${item.getPizza().getName()}"/>
+                <td th:text="${item.getPizzaSize()}"/>
+                <td th:text="${item.getQuantity()}"/>
+                <td>
+                    <button class="btn btn-outline-danger" type="submit">Delete</button>
+                </td>
+            </form>
         </tr>
         </tbody>
     </table>

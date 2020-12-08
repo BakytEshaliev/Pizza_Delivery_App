@@ -39,11 +39,11 @@ public class DeliveryAddressController {
     @GetMapping("/deliveryAddress")
     public String DeliveryAddressPage(Model model,
                                       Authentication auth){
-        User user = currentUserControllerAdvice
-                .getCurrentUser(auth)
-                .getUser();
-        Customer customer = customerRepository
-                .getByLoginName(user.getLoginName());
+//        User user = currentUserControllerAdvice
+//                .getCurrentUser(auth)
+//                .getUser();
+//        Customer customer = customerRepository
+//                .getByLoginName(user.getLoginName());
         model.addAttribute("listAllDeliveryAddresses", deliveryAddressRepository.findAll());
         return "deliveryAddress";
     }

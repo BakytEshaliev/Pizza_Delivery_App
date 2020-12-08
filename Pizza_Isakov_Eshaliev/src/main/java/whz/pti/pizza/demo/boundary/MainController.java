@@ -26,7 +26,7 @@ import java.util.Optional;
 
 @Controller
 @Slf4j
-public class MyController {
+public class MainController {
 
 
     @Autowired
@@ -43,13 +43,25 @@ public class MyController {
     CartRepository cartRepo;
 
     @GetMapping("/home")
-    public String home(Model model){
+    public String home(Model model,Authentication auth){
         for (PizzaSize value : PizzaSize.values()) {
             model.addAttribute(value.toString().toLowerCase(),value);
         }
+        User user = currentUserControllerAdvice
+                .getCurrentUser(auth)
+                .getUser();
+        Customer customer = customerRepo
+                .getByLoginName(user.getLoginName());
+        Cart cart = cartRepo.getByCustomer(customer);
+
         model.addAttribute("listAllPizzas",pizzaRepo.findAll());
-        model.addAttribute("amountPizzas",cartService.getQuantity());
-        model.addAttribute("totalPrice",cartService.calculateTotal());
+
+        int quantity = cart.getQuantity();
+        log.info("===quantity "+quantity);
+        model.addAttribute("amountPizzas", quantity);
+        double price = cartService.calculateTotal(cart);
+        log.info("===price "+price);
+        model.addAttribute("totalPrice", price);
         return "index";
     }
 
@@ -67,11 +79,9 @@ public class MyController {
         if (quantity > 0 && customer != null) {
             Optional<Pizza> pizza = pizzaRepo.findById(pizzaId);
             if (pizza.isPresent()) {
-                Cart cart = cartService.getCart();
-                //customer
-                if (cart.getCustomer() == null) {
-                    cart.setCustomer(customer);
-                }
+
+                Cart cart = cartRepo.getByCustomer(customer);
+
                 //parse
                 pizzaSizeCost = pizzaSizeCost.replace("/","");
                 String[] sizeCost = pizzaSizeCost.split("\\s+");
@@ -88,8 +98,12 @@ public class MyController {
                 item.setQuantity(quantity);
                 item.setPizzaSize(PizzaSize.valueOf(size));
                 item.setPizza(pizza.get());
-                cartService.addItem(item);
-                log.info("Cart "+cart);
+                itemRepo.save(item);
+
+                cartService.addItem(cart,item);
+                //update entity
+                cartRepo.save(cart);
+                log.info("=======Cart "+cart);
             }
 
         }

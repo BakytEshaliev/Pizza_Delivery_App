@@ -2,16 +2,13 @@ package whz.pti.pizza.demo.security.service.user;
 
 import whz.pti.pizza.demo.domain.Cart;
 import whz.pti.pizza.demo.domain.Item;
+import whz.pti.pizza.demo.security.domain.Customer;
 
 import java.util.List;
 
 public interface CartService {
-    void setCart(Cart cart);
-    void addItem(Item item);
-    Item getItemById(long id);
-    int getQuantity();
-    List<Item> getItems();
-    double calculateTotal();
-    Cart getCart();
-    void clearCart();
+
+    void addItem(Cart cart,Item item);
+    double calculateTotal(Cart cart);
+
 }

@@ -7,18 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import whz.pti.pizza.demo.domain.DeliveryAddress;
-import whz.pti.pizza.demo.domain.Item;
-import whz.pti.pizza.demo.domain.Ordered;
-import whz.pti.pizza.demo.domain.OrderedItem;
-import whz.pti.pizza.demo.domain.repositories.CustomerRepository;
-import whz.pti.pizza.demo.domain.repositories.DeliveryAddressRepository;
-import whz.pti.pizza.demo.domain.repositories.OrderedItemRepository;
-import whz.pti.pizza.demo.domain.repositories.OrderedRepository;
+import whz.pti.pizza.demo.domain.*;
+import whz.pti.pizza.demo.domain.repositories.*;
 import whz.pti.pizza.demo.security.boundary.CurrentUserControllerAdvice;
 import whz.pti.pizza.demo.security.domain.Customer;
 import whz.pti.pizza.demo.security.domain.User;
 import whz.pti.pizza.demo.security.service.user.CartService;
+
+import java.util.ArrayList;
 
 @Controller
 @Slf4j
@@ -29,6 +25,8 @@ public class OrderController {
 
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    CartRepository cartRepo;
 
     @Autowired
     OrderedRepository orderedRepository;
@@ -50,6 +48,7 @@ public class OrderController {
                 .getUser();
         Customer customer = customerRepository
                 .getByLoginName(user.getLoginName());
+        Cart cart = cartRepo.getByCustomer(customer);
 
         DeliveryAddress deliveryAddress = deliveryAddressRepository.getById(deliveryAddressId);
 
@@ -61,11 +60,11 @@ public class OrderController {
         }
 
         Ordered ordered = new Ordered();
-        ordered.setNumberOfItems(cartService.getQuantity());
+        ordered.setNumberOfItems(cart.getQuantity());
         ordered.setCustomer(customer);
         ordered.setDeliveryAddress(deliveryAddress);
 
-        for (Item item : cartService.getItems()){
+        for (Item item : cart.getItems()){
             OrderedItem orderedItem = new OrderedItem();
             orderedItem.setPizza(item.getPizza());
             orderedItem.setQuantity(item.getQuantity());
@@ -76,7 +75,9 @@ public class OrderController {
         }
 
         orderedRepository.save(ordered);
-        cartService.clearCart();
+        cart.setItems(new ArrayList<>());
+        cart.setQuantity(0);
+        cartRepo.save(cart);
         return "redirect:/home";
     }
 }
