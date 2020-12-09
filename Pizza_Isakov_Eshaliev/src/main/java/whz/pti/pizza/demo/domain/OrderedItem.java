@@ -16,9 +16,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 
 public class OrderedItem extends BaseEntity<Long> {
-//    @Id
-//    @GeneratedValue
-//    private Long id;
 
     @ManyToOne
     private Pizza pizza;

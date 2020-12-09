@@ -20,7 +20,6 @@ import whz.pti.pizza.demo.security.boundary.CurrentUserControllerAdvice;
 import whz.pti.pizza.demo.security.domain.Customer;
 import whz.pti.pizza.demo.security.domain.User;
 import whz.pti.pizza.demo.security.service.user.CartService;
-import whz.pti.pizza.demo.security.service.user.CartServiceImpl;
 
 import java.util.Optional;
 

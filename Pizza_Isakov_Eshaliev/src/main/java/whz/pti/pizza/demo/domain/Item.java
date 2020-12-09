@@ -10,8 +10,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @ToString
 public class Item extends BaseEntity<Long> {
-//    @Id @GeneratedValue
-//    private int id;
 
     private int quantity;
 

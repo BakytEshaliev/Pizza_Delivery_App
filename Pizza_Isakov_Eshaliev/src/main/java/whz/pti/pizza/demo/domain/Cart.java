@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import whz.pti.pizza.demo.common.BaseEntity;
 import whz.pti.pizza.demo.security.domain.Customer;
 

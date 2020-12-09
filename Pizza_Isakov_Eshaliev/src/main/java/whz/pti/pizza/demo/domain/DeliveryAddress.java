@@ -4,7 +4,6 @@ package whz.pti.pizza.demo.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import whz.pti.pizza.demo.common.BaseEntity;
 import whz.pti.pizza.demo.security.domain.Customer;
 
@@ -18,8 +17,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class DeliveryAddress extends BaseEntity<Long> {
-//    @Id @GeneratedValue
-//    private Long id;
+
     private String street;
     private String houseNumber;
     private String town;
