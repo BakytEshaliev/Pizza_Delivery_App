@@ -6,7 +6,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import whz.pti.pizza.demo.domain.DeliveryAddress;
@@ -19,6 +21,7 @@ import whz.pti.pizza.demo.security.domain.DeliveryAddressForm;
 import whz.pti.pizza.demo.security.domain.RegistrationForm;
 import whz.pti.pizza.demo.security.domain.User;
 import whz.pti.pizza.demo.security.service.user.CartService;
+import whz.pti.pizza.demo.security.service.validator.DeliveryAddressCreateValidator;
 //import whz.pti.pizza.demo.security.service.user.DeliveryAddressService;
 
 import javax.validation.Valid;
@@ -34,18 +37,19 @@ public class DeliveryAddressController {
     CurrentUserControllerAdvice currentUserControllerAdvice;
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    DeliveryAddressCreateValidator deliveryAddressCreateValidator;
 
 
     @GetMapping("/deliveryAddress")
-    public String DeliveryAddressPage(Model model,
-                                      Authentication auth){
-//        User user = currentUserControllerAdvice
-//                .getCurrentUser(auth)
-//                .getUser();
-//        Customer customer = customerRepository
-//                .getByLoginName(user.getLoginName());
+    public String DeliveryAddressPage(Model model){
         model.addAttribute("listAllDeliveryAddresses", deliveryAddressRepository.findAll());
         return "deliveryAddress";
+    }
+
+    @InitBinder("daForm")
+    public void initBinder(WebDataBinder binder){
+        binder.addValidators(deliveryAddressCreateValidator);
     }
 
     @GetMapping("/newAddress")
