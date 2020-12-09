@@ -18,9 +18,6 @@ import java.util.List;
 @NoArgsConstructor
 
 public class Ordered extends BaseEntity<Long> {
-//    @Id
-//    @GeneratedValue
-//    private Long id;
 
     private int numberOfItems;
 

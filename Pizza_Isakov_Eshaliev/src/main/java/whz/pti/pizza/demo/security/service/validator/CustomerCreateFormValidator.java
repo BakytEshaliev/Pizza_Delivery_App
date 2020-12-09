@@ -4,13 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.xml.sax.SAXException;
 import whz.pti.pizza.demo.domain.repositories.UserRepository;
 import whz.pti.pizza.demo.security.domain.RegistrationForm;
 
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import java.io.IOException;
 
 @Component
 public class CustomerCreateFormValidator implements Validator {

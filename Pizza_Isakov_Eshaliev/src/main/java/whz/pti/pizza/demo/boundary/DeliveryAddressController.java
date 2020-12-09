@@ -12,25 +12,20 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import whz.pti.pizza.demo.domain.DeliveryAddress;
-import whz.pti.pizza.demo.domain.repositories.CartRepository;
 import whz.pti.pizza.demo.domain.repositories.CustomerRepository;
 import whz.pti.pizza.demo.domain.repositories.DeliveryAddressRepository;
 import whz.pti.pizza.demo.security.boundary.CurrentUserControllerAdvice;
 import whz.pti.pizza.demo.security.domain.Customer;
 import whz.pti.pizza.demo.security.domain.DeliveryAddressForm;
-import whz.pti.pizza.demo.security.domain.RegistrationForm;
 import whz.pti.pizza.demo.security.domain.User;
-import whz.pti.pizza.demo.security.service.user.CartService;
 import whz.pti.pizza.demo.security.service.validator.DeliveryAddressCreateValidator;
-//import whz.pti.pizza.demo.security.service.user.DeliveryAddressService;
 
 import javax.validation.Valid;
 
 @Controller
 @Slf4j
 public class DeliveryAddressController {
-//    @Autowired
-//    DeliveryAddressService deliveryAddressService;
+
     @Autowired
     DeliveryAddressRepository deliveryAddressRepository;
     @Autowired
@@ -53,8 +48,7 @@ public class DeliveryAddressController {
     }
 
     @GetMapping("/newAddress")
-    public String NewAddressPage(Model model, Authentication auth){
-        DeliveryAddress da = new DeliveryAddress();
+    public String NewAddressPage(){
         return "newAddress";
     }
 

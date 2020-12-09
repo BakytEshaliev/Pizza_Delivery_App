@@ -1,20 +1,12 @@
 package whz.pti.pizza.demo.security.service.user;
 
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import whz.pti.pizza.demo.domain.Cart;
 import whz.pti.pizza.demo.domain.Item;
 import whz.pti.pizza.demo.domain.repositories.CartRepository;
-import whz.pti.pizza.demo.security.domain.Customer;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 @Service
