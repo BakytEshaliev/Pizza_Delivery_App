@@ -52,6 +52,13 @@ public class MainController {
                 .getUser();
         Customer customer = customerRepo
                 .getByLoginName(user.getLoginName());
+        if (customer == null){
+            model.addAttribute("listAllPizzas",pizzaRepo.findAll());
+            model.addAttribute("amountPizzas", 0);
+            model.addAttribute("totalPrice", 0);
+
+            return "index";
+        }
         Cart cart = cartRepo.getByCustomer(customer);
 
         model.addAttribute("listAllPizzas",pizzaRepo.findAll());
@@ -75,6 +82,9 @@ public class MainController {
                     .getUser();
         Customer customer = customerRepo
                 .getByLoginName(user.getLoginName());
+        if (customer == null){
+            return "redirect:/home";
+        }
 
         if (quantity > 0 && customer != null) {
             Optional<Pizza> pizza = pizzaRepo.findById(pizzaId);

@@ -68,6 +68,9 @@ public class DeliveryAddressController {
                 .getUser();
         Customer customer = customerRepository
                 .getByLoginName(user.getLoginName());
+        if (customer == null){
+            return "redirect:/home";
+        }
 
         DeliveryAddress da = new DeliveryAddress(form.getStreet(), form.getHauseNumber(),
                 form.getTown(),form.getPostalCode());

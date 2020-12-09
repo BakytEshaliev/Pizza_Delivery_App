@@ -37,7 +37,9 @@ public class CartController {
                 .getUser();
         Customer customer = customerRepo
                 .getByLoginName(user.getLoginName());
-
+        if (customer == null){
+            return "redirect:/home";
+        }
         Cart cart = cartRepo.getByCustomer(customer);
         model.addAttribute("items",cart.getItems());
         double price = cartService.calculateTotal(cart);

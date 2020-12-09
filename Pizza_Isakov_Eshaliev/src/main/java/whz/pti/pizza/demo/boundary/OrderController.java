@@ -48,6 +48,10 @@ public class OrderController {
                 .getUser();
         Customer customer = customerRepository
                 .getByLoginName(user.getLoginName());
+
+        if (customer == null){
+            return "redirect:/home";
+        }
         Cart cart = cartRepo.getByCustomer(customer);
 
         DeliveryAddress deliveryAddress = deliveryAddressRepository.getById(deliveryAddressId);
