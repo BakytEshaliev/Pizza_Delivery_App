@@ -18,9 +18,7 @@ public class CurrentUserDetailsService implements UserDetailsService {
 
     @Override
     public CurrentUser loadUserByUsername(String loginName) throws UsernameNotFoundException {
-        log.info(loginName);
         User user = userRepo.findByLoginName(loginName);
-        log.info("User "+user);
         if (user == null) {
             throw new UsernameNotFoundException("Customer with loginName = " + loginName + " cannot be not found");
         }

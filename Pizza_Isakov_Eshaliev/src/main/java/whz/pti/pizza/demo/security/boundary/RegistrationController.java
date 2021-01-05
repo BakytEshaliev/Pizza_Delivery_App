@@ -17,6 +17,7 @@ import whz.pti.pizza.demo.security.domain.Customer;
 import whz.pti.pizza.demo.security.domain.RegistrationForm;
 import whz.pti.pizza.demo.security.domain.User;
 import whz.pti.pizza.demo.security.service.validator.CustomerCreateFormValidator;
+import whz.pti.pizza.demo.service.SmmpService;
 
 import javax.validation.Valid;
 
@@ -32,6 +33,9 @@ public class RegistrationController {
     CustomerCreateFormValidator customerCreateFormValidator;
     @Autowired
     CartRepository cartRepository;
+
+    @Autowired
+    SmmpService smmpService;
 
     PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
@@ -67,6 +71,7 @@ public class RegistrationController {
         Cart cart = new Cart();
         cart.setCustomer(customer);
         cartRepository.save(cart);
+        smmpService.doAction("openAcc",customer.getLoginName(),-1);
         log.info("Register "+customer);
         log.info("Register "+user);
         return "redirect:/login";

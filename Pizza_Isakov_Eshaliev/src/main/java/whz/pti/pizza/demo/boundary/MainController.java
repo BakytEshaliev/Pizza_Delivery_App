@@ -2,12 +2,12 @@ package whz.pti.pizza.demo.boundary;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import whz.pti.pizza.demo.common.CurrentUserUtil;
 import whz.pti.pizza.demo.domain.Cart;
 import whz.pti.pizza.demo.domain.Item;
 import whz.pti.pizza.demo.domain.Pizza;
@@ -16,10 +16,10 @@ import whz.pti.pizza.demo.domain.repositories.CartRepository;
 import whz.pti.pizza.demo.domain.repositories.CustomerRepository;
 import whz.pti.pizza.demo.domain.repositories.ItemRepository;
 import whz.pti.pizza.demo.domain.repositories.PizzaRepository;
-import whz.pti.pizza.demo.security.boundary.CurrentUserControllerAdvice;
 import whz.pti.pizza.demo.security.domain.Customer;
 import whz.pti.pizza.demo.security.domain.User;
 import whz.pti.pizza.demo.security.service.user.CartService;
+import whz.pti.pizza.demo.service.SmmpService;
 
 import java.util.Optional;
 
@@ -28,8 +28,6 @@ import java.util.Optional;
 public class MainController {
 
 
-    @Autowired
-    CurrentUserControllerAdvice currentUserControllerAdvice;
     @Autowired
     PizzaRepository pizzaRepo;
     @Autowired
@@ -40,14 +38,15 @@ public class MainController {
     CartService cartService;
     @Autowired
     CartRepository cartRepo;
+    @Autowired
+    SmmpService smmpService;
 
     @GetMapping("/home")
-    public String home(Model model,Authentication auth){
+    public String home(Model model){
         for (PizzaSize value : PizzaSize.values()) {
             model.addAttribute(value.toString().toLowerCase(),value);
         }
-        User user = currentUserControllerAdvice
-                .getCurrentUser(auth)
+        User user = CurrentUserUtil.getCurrentUser(model)
                 .getUser();
         Customer customer = customerRepo
                 .getByLoginName(user.getLoginName());
@@ -60,13 +59,15 @@ public class MainController {
         }
         Cart cart = cartRepo.getByCustomer(customer);
 
+
+        model.addAttribute("balance",smmpService.doAction("balance",customer.getLoginName(),-1).getDescription());
         model.addAttribute("listAllPizzas",pizzaRepo.findAll());
 
         int quantity = cart.getQuantity();
-        log.info("===quantity "+quantity);
+//        log.info("===quantity "+quantity);
         model.addAttribute("amountPizzas", quantity);
         double price = cartService.calculateTotal(cart);
-        log.info("===price "+price);
+//        log.info("===price "+price);
         model.addAttribute("totalPrice", price);
         return "index";
     }
@@ -75,9 +76,8 @@ public class MainController {
     public String addPizza(@RequestParam Integer quantity,
                            @RequestParam Long pizzaId,
                            @RequestParam String pizzaSizeCost,
-                           Authentication auth){
-        User user = currentUserControllerAdvice
-                    .getCurrentUser(auth)
+                           Model model){
+        User user = CurrentUserUtil.getCurrentUser(model)
                     .getUser();
         Customer customer = customerRepo
                 .getByLoginName(user.getLoginName());
