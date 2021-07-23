@@ -12,7 +12,6 @@ import whz.pti.pizza.demo.security.boundary.CurrentUserControllerAdvice;
 import whz.pti.pizza.demo.security.domain.Customer;
 import whz.pti.pizza.demo.security.domain.User;
 import whz.pti.pizza.demo.security.service.user.CartService;
-import whz.pti.pizza.demo.service.SmmpService;
 import whz.pti.pizza.demo.service.dto.PayActionResponseDTO;
 
 import java.util.ArrayList;
@@ -41,8 +40,6 @@ public class OrderController {
     @Autowired
     CartService cartService;
 
-    @Autowired
-    SmmpService smmpService;
 
     @PostMapping("/order")
     public String order(Authentication auth,
@@ -80,14 +77,6 @@ public class OrderController {
             orderedItem.setPizzaSize(item.getPizzaSize());
             orderedItemRepository.save(orderedItem);
             ordered.addOrderedItem(orderedItem);
-        }
-        PayActionResponseDTO transfer = smmpService.doAction("transfer", customer.getLoginName(), cartService.calculateTotal(cart));
-        if (transfer.isPayment()) {
-            orderedRepository.save(ordered);
-            cart.setItems(new ArrayList<>());
-            cart.setQuantity(0);
-            cartRepo.save(cart);
-            log.info("==>>check payment");
         }
         return "redirect:/home";
     }

@@ -19,7 +19,6 @@ import whz.pti.pizza.demo.domain.repositories.PizzaRepository;
 import whz.pti.pizza.demo.security.domain.Customer;
 import whz.pti.pizza.demo.security.domain.User;
 import whz.pti.pizza.demo.security.service.user.CartService;
-import whz.pti.pizza.demo.service.SmmpService;
 
 import java.util.Optional;
 
@@ -38,8 +37,6 @@ public class MainController {
     CartService cartService;
     @Autowired
     CartRepository cartRepo;
-    @Autowired
-    SmmpService smmpService;
 
     @GetMapping("/home")
     public String home(Model model){
@@ -59,8 +56,6 @@ public class MainController {
         }
         Cart cart = cartRepo.getByCustomer(customer);
 
-
-        model.addAttribute("balance",smmpService.doAction("balance",customer.getLoginName(),-1).getDescription());
         model.addAttribute("listAllPizzas",pizzaRepo.findAll());
 
         int quantity = cart.getQuantity();
