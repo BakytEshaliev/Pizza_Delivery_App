@@ -16,5 +16,6 @@ This is a web app for ordering pizza. It implements the functionality of registr
 <li>Thymeleaf</li>
 <li>Bootstrap</li>
 <li>H2 Database</li>
+<li>Gradle</li>
 
 
